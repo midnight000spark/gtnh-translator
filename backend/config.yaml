@@ -1,0 +1,16 @@
+api:
+  url: "http://localhost:8000/v1/chat/completions"
+  model: "openai/gpt-oss-20b"
+  temperature: 0.2
+  timeout: 120
+  max_retries: 3
+
+files:
+  input: "data/en_us.json"
+  output: "data/ru_ru.json"
+  dictionary: "data/translation_dictionary.json"
+  log: "logs/translation.log"
+
+processing:
+  max_workers: 1
+  save_interval: 50

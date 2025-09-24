@@ -1,4 +1,3 @@
-# backend/app/main.py
 from fastapi import FastAPI, WebSocket
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -29,7 +28,7 @@ app.add_middleware(
 app.include_router(router, prefix="/api")
 
 # WebSocket для реалтайм обновлений
-active_connections: list[WebSocket] = []
+active_connections = []
 
 @app.websocket("/ws")
 async def websocket_endpoint(websocket: WebSocket):
@@ -51,9 +50,6 @@ async def broadcast_message(message: Dict[str, Any]):
 
 # Делаем broadcast доступным для других модулей
 app.state.broadcast = broadcast_message
-
-# Статика для продакшена
-app.mount("/", StaticFiles(directory="frontend/dist", html=True), name="static")
 
 if __name__ == "__main__":
     uvicorn.run("app.main:app", host="0.0.0.0", port=8000, reload=True)

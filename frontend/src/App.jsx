@@ -9,7 +9,6 @@ function App() {
   const [stats, setStats] = useState({});
 
   useEffect(() => {
-    // Подключаемся к WebSocket
     const websocket = new WebSocket('ws://localhost:8000/ws');
     
     websocket.onmessage = (event) => {
@@ -30,7 +29,6 @@ function App() {
     
     setWs(websocket);
     
-    // Получаем начальную статистику
     axios.get('/api/stats').then(res => setStats(res.data));
     
     return () => websocket.close();
@@ -62,7 +60,6 @@ function App() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 text-white">
       <div className="container mx-auto px-4 py-8">
-        {/* Заголовок */}
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">
             🌟 GTNH Переводчик 🌟
@@ -70,7 +67,6 @@ function App() {
           <p className="text-xl text-blue-200">Путь к просветлению через перевод</p>
         </div>
 
-        {/* Статистика */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
           <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20">
             <h3 className="text-lg font-semibold mb-2">📊 Всего записей</h3>
@@ -88,7 +84,6 @@ function App() {
           </div>
         </div>
 
-        {/* Прогресс */}
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 mb-8">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-2xl font-bold">🌀 Прогресс перевода</h2>
@@ -113,7 +108,6 @@ function App() {
           )}
         </div>
 
-        {/* Статус */}
         <div className="bg-white/10 backdrop-blur-lg rounded-xl p-6 border border-white/20 mb-8">
           <h2 className="text-2xl font-bold mb-4">🧘‍♂️ Состояние пути</h2>
           <p className="text-xl text-center py-4 bg-black/20 rounded-lg">
@@ -121,7 +115,6 @@ function App() {
           </p>
         </div>
 
-        {/* Кнопки управления */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
           <button
             onClick={startTranslation}
@@ -138,7 +131,6 @@ function App() {
           </button>
         </div>
 
-        {/* Мантры */}
         <div className="text-center text-blue-200">
           <p className="italic">"Каждый ключ в JSON - это мантра, каждый перевод - шаг к нирване"</p>
           <p className="mt-2">Создано с ❤️ для сообщества GTNH</p>

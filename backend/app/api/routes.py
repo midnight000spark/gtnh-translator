@@ -1,4 +1,3 @@
-# backend/app/api/routes.py
 from fastapi import APIRouter, Request
 from typing import Dict, Any
 import asyncio
@@ -10,7 +9,7 @@ from app.utils.config import load_config
 router = APIRouter()
 
 # Глобальный движок перевода
-translation_engine: Optional[TranslationEngine] = None
+translation_engine = None
 
 @router.on_event("startup")
 async def startup_event():
@@ -67,13 +66,6 @@ async def start_translation(request: StartTranslationRequest, req: Request):
     )
     
     return {"status": "Перевод начат"}
-
-@router.get("/dictionary")
-async def get_dictionary():
-    if not translation_engine or not translation_engine.dictionary:
-        return {"error": "Словарь недоступен"}
-    
-    return translation_engine.dictionary.data
 
 async def run_translation_task(engine, input_file, output_file, dry_run, broadcast_func):
     """Фоновая задача перевода с отправкой обновлений через WebSocket"""
